@@ -7,6 +7,7 @@ import java.util.concurrent.TimeUnit;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.security.core.AuthenticationException;
+import org.springframework.stereotype.Component;
 
 import com.api.demo.entities.User;
 import com.api.demo.entities.Usuario;
@@ -17,6 +18,8 @@ import io.jsonwebtoken.JwtParser;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 
+
+@Component
 public class JwtUtil {
 
 	 private final String secret_key = "mysecretkey";
@@ -31,9 +34,9 @@ public class JwtUtil {
 	        this.jwtParser = Jwts.parser().setSigningKey(secret_key);
 	    }
 
-	    public String createToken(Usuario user) {
+	    public String createToken(User user) {
 	        Claims claims = Jwts.claims().setSubject(user.getEmail());
-	        claims.put("firstName",user.getNombre());
+	        claims.put("nombre",user.getNombre());
 	        Date tokenCreateTime = new Date();
 	        Date tokenValidity = new Date(tokenCreateTime.getTime() + TimeUnit.MINUTES.toMillis(accessTokenValidity));
 	        return Jwts.builder()

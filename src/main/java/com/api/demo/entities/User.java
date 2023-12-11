@@ -19,5 +19,10 @@ public class User {
 	@Column(nullable=false, length=50)
 	private String email;
 	
+	   public User(String email, String password) {
+	        this.email = email;
+	        this.nombre = password;
+	    }
+	
 
 }
